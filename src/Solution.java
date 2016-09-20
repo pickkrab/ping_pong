@@ -4,10 +4,10 @@ class Solution {
 
     public static void main(String[] args) {
         Thread thread1 = new Thread(() -> {
+            while (ready) {
+                System.out.println("Ping");
             synchronized (lock) {
-                while (ready) {
                     try {
-                        System.out.println("Ping");
                         ready = false;
                         lock.notify();
                         lock.wait();
@@ -19,10 +19,10 @@ class Solution {
         });
 
         Thread thread2 = new Thread(() -> {
+            while (!ready) {
+                System.out.println("Pong");
             synchronized (lock) {
-                while (!ready) {
                     try {
-                        System.out.println("Pong");
                         ready = true;
                         lock.notify();
                         lock.wait();
