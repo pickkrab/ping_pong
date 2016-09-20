@@ -6,7 +6,7 @@ class Solution {
         Thread thread1 = new Thread(() -> {
             while (ready) {
                 System.out.println("Ping");
-            synchronized (lock) {
+                synchronized (lock) {
                     try {
                         ready = false;
                         lock.notify();
@@ -21,7 +21,7 @@ class Solution {
         Thread thread2 = new Thread(() -> {
             while (!ready) {
                 System.out.println("Pong");
-            synchronized (lock) {
+                synchronized (lock) {
                     try {
                         ready = true;
                         lock.notify();
